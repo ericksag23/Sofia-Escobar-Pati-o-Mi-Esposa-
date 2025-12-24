@@ -109,20 +109,47 @@ button:hover {
 </audio>
 
 <script>
-  // Espera a que la página cargue
   window.addEventListener('load', () => {
     const audio = document.getElementById('miAudio');
-    
-    // Intenta reproducir automáticamente
+
     audio.play().catch(() => {
-      // Si falla (autoplay bloqueado), muestra un mensaje y botón
+      // Crear botón
       const boton = document.createElement('button');
       boton.textContent = 'Reproducir música';
-      boton.onclick = () => audio.play();
+      boton.id = 'botonMusica';
+
+      // Cuando se haga clic, reproducir audio y ocultar botón
+      boton.onclick = () => {
+        audio.play();
+        boton.style.display = 'none';
+      };
+
       document.body.appendChild(boton);
     });
   });
 </script>
+
+<style>
+  #botonMusica {
+    position: fixed; /* Fijo en la pantalla */
+    top: 10px;       /* A 10px del borde superior */
+    left: 50%;       /* Centrado horizontal */
+    transform: translateX(-50%); /* Ajusta el centrado exacto */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 9999;   /* Para que esté encima de todo */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+
+  #botonMusica:hover {
+    background-color: #ff85c1;
+  }
+</style>
 
 <div class="card">
   <h1>💖 Felices 3 meses Amorcito 💖</h1>
@@ -217,4 +244,5 @@ setInterval(() => {
 
 </body>
 </html>
+
 

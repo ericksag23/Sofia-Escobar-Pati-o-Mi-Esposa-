@@ -103,9 +103,26 @@ button:hover {
 <body>
 
 <!-- Música -->
-<audio autoplay loop>
+<audio id="miAudio" loop>
   <source src="enamorado.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
 </audio>
+
+<script>
+  // Espera a que la página cargue
+  window.addEventListener('load', () => {
+    const audio = document.getElementById('miAudio');
+    
+    // Intenta reproducir automáticamente
+    audio.play().catch(() => {
+      // Si falla (autoplay bloqueado), muestra un mensaje y botón
+      const boton = document.createElement('button');
+      boton.textContent = 'Reproducir música';
+      boton.onclick = () => audio.play();
+      document.body.appendChild(boton);
+    });
+  });
+</script>
 
 <div class="card">
   <h1>💖 Felices 3 meses Amorcito 💖</h1>
@@ -200,3 +217,4 @@ setInterval(() => {
 
 </body>
 </html>
+

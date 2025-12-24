@@ -118,23 +118,28 @@ button:hover {
       boton.textContent = 'Reproducir música';
       boton.id = 'botonMusica';
 
-      // Cuando se haga clic, reproducir audio y ocultar botón
+      // Añadir al body
+      document.body.appendChild(boton);
+
+      // Animación de entrada
+      setTimeout(() => boton.classList.add('visible'), 50);
+
+      // Al hacer clic: reproducir audio y desaparecer con transición
       boton.onclick = () => {
         audio.play();
-        boton.style.display = 'none';
+        boton.classList.remove('visible'); // Desaparece suavemente
+        setTimeout(() => boton.remove(), 500); // Luego lo elimina del DOM
       };
-
-      document.body.appendChild(boton);
     });
   });
 </script>
 
 <style>
   #botonMusica {
-    position: fixed; /* Fijo en la pantalla */
-    top: 10px;       /* A 10px del borde superior */
-    left: 50%;       /* Centrado horizontal */
-    transform: translateX(-50%); /* Ajusta el centrado exacto */
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50px); /* Arriba para animación */
     padding: 10px 20px;
     font-size: 16px;
     background-color: #ff69b4;
@@ -142,8 +147,17 @@ button:hover {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    z-index: 9999;   /* Para que esté encima de todo */
+    z-index: 9999;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+
+    /* Transición para animar entrada y salida */
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  #botonMusica.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Se mueve a su posición */
   }
 
   #botonMusica:hover {
@@ -244,5 +258,6 @@ setInterval(() => {
 
 </body>
 </html>
+
 
 
